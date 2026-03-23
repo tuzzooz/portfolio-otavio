@@ -4,7 +4,6 @@ import { supabase } from '../services/supabase';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 
-// Tipagem correta para o banco de dados e as abas (removendo o 'any')
 type MessageItem = { id?: number; name: string; message: string; created_at: string };
 type TabContent = { title: string; items: string[] };
 
@@ -17,7 +16,6 @@ export default function Guestbook() {
   const [totalMessages, setTotalMessages] = useState(0);
   const [activeTab, setActiveTab] = useState('musicas');
 
-  // A função fetchMessages agora vem ANTES do useEffect
   const fetchMessages = async () => {
     setIsLoading(true);
     
@@ -60,7 +58,6 @@ export default function Guestbook() {
     setIsSubmitting(false);
   };
 
-  // Função para transformar URLs em texto em links clicáveis
   const renderMessageWithLinks = (text: string) => {
     const urlRegex = /(https?:\/\/[^\s]+)/g;
     const parts = text.split(urlRegex);
@@ -85,7 +82,7 @@ export default function Guestbook() {
 
   const fadeUp = {
     hidden: { opacity: 0, y: 40 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.215, 0.61, 0.355, 1] as [number, number, number, number] } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.215, 0.61, 0.355, 1] as [number, number, number, number], delay: 1 } }
   };
 
  const tabContent: Record<string, TabContent> = {
@@ -110,7 +107,7 @@ export default function Guestbook() {
       <motion.div 
         initial={{ y: 0 }}
         animate={{ y: "100vh" }}
-        transition={{ duration: 0.8, ease: [0.215, 0.61, 0.355, 1] as [number, number, number, number] }}
+        transition={{ duration: 0.8, ease: [0.215, 0.61, 0.355, 1] as [number, number, number, number], delay: 1 }}
         className="fixed inset-0 z-[9999] bg-manga-black flex items-center justify-center pointer-events-none overflow-hidden"
       >
         <motion.div 
@@ -220,12 +217,13 @@ export default function Guestbook() {
             ) : messages.length === 0 ? (
               <p className="text-manga-white/40 font-light">Nenhuma mensagem ainda. Seja o primeiro!</p>
             ) : (
-              messages.map((msg) => (
+              messages.map((msg, index) => (
                 <motion.div 
                   key={msg.id} 
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
                   className="border border-manga-white/10 p-8 rounded-lg flex flex-col gap-4"
                 >
                   <p className="text-manga-white text-lg font-light leading-relaxed whitespace-pre-wrap">

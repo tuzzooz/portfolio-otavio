@@ -61,7 +61,7 @@ export default function Projects() {
 
   const heroFadeUp = {
     hidden: { opacity: 0, y: 40 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.215, 0.61, 0.355, 1] as [number, number, number, number] } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.215, 0.61, 0.355, 1] as [number, number, number, number], delay: 1 } }
   };
 
   return (
@@ -71,7 +71,7 @@ export default function Projects() {
       <motion.div 
         initial={{ y: 0 }}
         animate={{ y: "100vh" }}
-        transition={{ duration: 0.8, ease: [0.215, 0.61, 0.355, 1] as [number, number, number, number] }}
+        transition={{ duration: 0.8, ease: [0.215, 0.61, 0.355, 1] as [number, number, number, number], delay: 1 }}
         className="fixed inset-0 z-[9999] bg-manga-black flex items-center justify-center pointer-events-none overflow-hidden"
       >
         <motion.div 
@@ -110,7 +110,7 @@ export default function Projects() {
         </motion.div>
       </section>
 
-      {/* Toolbar - Linha superior removida (border-b apenas) */}
+      {/* Toolbar */}
       <section className="border-b border-manga-green/30 px-6 md:px-16 lg:px-32 py-4 flex justify-end items-center gap-4 bg-manga-black">
         <button 
           onClick={() => setViewMode('list')}
@@ -157,37 +157,42 @@ export default function Projects() {
               transition={{ duration: 0.3 }}
               className="flex flex-col w-full"
             >
-              {projectsData.map((project) => (
-                <Link 
-                  to={`/projetos/${project.id}`} 
+              {projectsData.map((project, index) => (
+                <motion.div
                   key={project.id}
-                  className="group flex flex-col md:grid md:grid-cols-12 gap-4 items-start md:items-center py-8 md:py-10 border-b border-manga-white/10 hover:border-manga-green transition-colors cursor-pointer"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 1.2 + (index * 0.1) }}
                 >
-                  <div className="col-span-5 text-manga-white text-2xl md:text-3xl font-medium group-hover:text-manga-green transition-colors w-full break-words pr-4">
-                    {project.name}
-                  </div>
-                  
-                  <div className="hidden md:block col-span-3 text-left text-manga-white/70 text-lg">
-                    {project.client}
-                  </div>
-                  <div className="hidden md:block col-span-3 text-left text-manga-white/70 text-lg">
-                    {project.tech}
-                  </div>
-                  <div className="hidden md:block col-span-1 text-right text-manga-white/70 text-lg">
-                    {project.date}
-                  </div>
-
-                  {/* Mobile Version */}
-                  <div className="flex md:hidden flex-col gap-1 mt-3 w-full">
-                    <div className="flex justify-between text-sm text-manga-white/70">
-                      <span>{project.client}</span>
-                      <span>{project.date}</span>
+                  <Link 
+                    to={`/projetos/${project.id}`} 
+                    className="group flex flex-col md:grid md:grid-cols-12 gap-4 items-start md:items-center py-8 md:py-10 border-b border-manga-white/10 hover:border-manga-green transition-colors cursor-pointer"
+                  >
+                    <div className="col-span-5 text-manga-white text-2xl md:text-3xl font-medium group-hover:text-manga-green transition-colors w-full break-words pr-4">
+                      {project.name}
                     </div>
-                    <div className="text-sm text-manga-green opacity-80">
+                    
+                    <div className="hidden md:block col-span-3 text-left text-manga-white/70 text-lg">
+                      {project.client}
+                    </div>
+                    <div className="hidden md:block col-span-3 text-left text-manga-white/70 text-lg">
                       {project.tech}
                     </div>
-                  </div>
-                </Link>
+                    <div className="hidden md:block col-span-1 text-right text-manga-white/70 text-lg">
+                      {project.date}
+                    </div>
+
+                    <div className="flex md:hidden flex-col gap-1 mt-3 w-full">
+                      <div className="flex justify-between text-sm text-manga-white/70">
+                        <span>{project.client}</span>
+                        <span>{project.date}</span>
+                      </div>
+                      <div className="text-sm text-manga-green opacity-80">
+                        {project.tech}
+                      </div>
+                    </div>
+                  </Link>
+                </motion.div>
               ))}
             </motion.div>
           )}
@@ -202,33 +207,39 @@ export default function Projects() {
               transition={{ duration: 0.3 }}
               className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 pt-8"
             >
-              {projectsData.map((project) => (
-                <Link 
-                  to={`/projetos/${project.id}`} 
+              {projectsData.map((project, index) => (
+                <motion.div
                   key={project.id}
-                  className="group flex flex-col gap-6 cursor-pointer"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 1.2 + (index * 0.1) }}
                 >
-                  <div className="w-full aspect-[4/3] md:aspect-video overflow-hidden bg-manga-white/5 relative">
-                    <img 
-                      src={project.image} 
-                      alt={project.name} 
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                    />
-                    <div className="absolute inset-0 bg-manga-black/20 group-hover:bg-transparent transition-colors duration-500" />
-                  </div>
-                  
-                  <div className="flex justify-between items-start">
-                    <div className="flex flex-col gap-2">
-                      <h3 className="text-manga-white text-2xl md:text-3xl font-medium group-hover:text-manga-green transition-colors">
-                        {project.name}
-                      </h3>
-                      <p className="text-manga-white/50 text-sm tracking-widest uppercase">
-                        {project.tech}
-                      </p>
+                  <Link 
+                    to={`/projetos/${project.id}`} 
+                    className="group flex flex-col gap-6 cursor-pointer"
+                  >
+                    <div className="w-full aspect-[4/3] md:aspect-video overflow-hidden bg-manga-white/5 relative">
+                      <img 
+                        src={project.image} 
+                        alt={project.name} 
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                      />
+                      <div className="absolute inset-0 bg-manga-black/20 group-hover:bg-transparent transition-colors duration-500" />
                     </div>
-                    <span className="text-manga-white/40 font-light mt-1">{project.date}</span>
-                  </div>
-                </Link>
+                    
+                    <div className="flex justify-between items-start">
+                      <div className="flex flex-col gap-2">
+                        <h3 className="text-manga-white text-2xl md:text-3xl font-medium group-hover:text-manga-green transition-colors">
+                          {project.name}
+                        </h3>
+                        <p className="text-manga-white/50 text-sm tracking-widest uppercase">
+                          {project.tech}
+                        </p>
+                      </div>
+                      <span className="text-manga-white/40 font-light mt-1">{project.date}</span>
+                    </div>
+                  </Link>
+                </motion.div>
               ))}
             </motion.div>
           )}

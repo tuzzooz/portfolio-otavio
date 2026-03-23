@@ -11,7 +11,7 @@ export default function Contact() {
 
   const heroFadeUp = {
     hidden: { opacity: 0, y: 40 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.215, 0.61, 0.355, 1] as [number, number, number, number] } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.215, 0.61, 0.355, 1] as [number, number, number, number], delay: 1 } }
   };
 
   return (
@@ -21,7 +21,7 @@ export default function Contact() {
       <motion.div 
         initial={{ y: 0 }}
         animate={{ y: "100vh" }}
-        transition={{ duration: 0.8, ease: [0.215, 0.61, 0.355, 1] as [number, number, number, number] }}
+        transition={{ duration: 0.8, ease: [0.215, 0.61, 0.355, 1] as [number, number, number, number], delay: 1 }}
         className="fixed inset-0 z-[9999] bg-manga-black flex items-center justify-center pointer-events-none overflow-hidden"
       >
         <motion.div 
