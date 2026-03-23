@@ -36,8 +36,8 @@ const projectsDatabase = {
     role: 'Desenvolvedor Backend',
     overview: 'Arquitetura e desenvolvimento de um sistema de gerenciamento de tarefas escalável utilizando microserviços em Java, projetado para suportar alta concorrência.',
     impact: 'Desenvolvi os microserviços principais de autenticação e gestão de tarefas usando Spring Boot, cobrindo 90% do código crítico com testes unitários e de integração.',
-    image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1600&auto=format&fit=crop',
-    github: 'https://github.com/seu-usuario/gsw-task-manager'
+    image: '/GSW1.png',
+    github: 'https://github.com/the-devs-department/GSW-2025.2-3Sem'
   },
   'helpnei': {
     name: 'Dashboard Empresas',
@@ -47,8 +47,8 @@ const projectsDatabase = {
     role: 'Desenvolvedor Frontend',
     overview: 'Criação de um painel de controle administrativo para a Helpnei, focado na visualização clara de métricas B2B e gestão de usuários.',
     impact: 'Refatorei a arquitetura de estado da aplicação utilizando React Context, eliminando prop drilling excessivo e melhorando a manutenibilidade do código para o time.',
-    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1600&auto=format&fit=crop',
-    github: 'https://github.com/seu-usuario/helpnei-dashboard'
+    image: '/Helpnei2port.png',
+    github: 'https://github.com/the-devs-department/HELPNEI-2025.1-2Sem'
   },
   'hq-app': {
     name: 'Leitor de HQ',
@@ -85,7 +85,7 @@ export default function ProjectDetails() {
 
   const fadeUp = {
     hidden: { opacity: 0, y: 40 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.215, 0.61, 0.355, 1] } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.215, 0.61, 0.355, 1] as [number, number, number, number] } }
   };
 
   if (!project) {
@@ -106,7 +106,7 @@ export default function ProjectDetails() {
       <motion.div 
         initial={{ y: 0 }}
         animate={{ y: "100vh" }}
-        transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 0.5 }}
+        transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] as [number, number, number, number], delay: 0.5 }}
         className="fixed inset-0 z-[9999] bg-manga-black flex items-center justify-center pointer-events-none overflow-hidden"
       />
 

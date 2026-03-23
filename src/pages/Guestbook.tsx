@@ -4,8 +4,12 @@ import { supabase } from '../services/supabase';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 
+// Tipagem correta para o banco de dados e as abas (removendo o 'any')
+type MessageItem = { id?: number; name: string; message: string; created_at: string };
+type TabContent = { title: string; items: string[] };
+
 export default function Guestbook() {
-  const [messages, setMessages] = useState<any[]>([]);
+  const [messages, setMessages] = useState<MessageItem[]>([]);
   const [name, setName] = useState('');
   const [message, setMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -13,10 +17,7 @@ export default function Guestbook() {
   const [totalMessages, setTotalMessages] = useState(0);
   const [activeTab, setActiveTab] = useState('musicas');
 
-  useEffect(() => {
-    fetchMessages();
-  }, []);
-
+  // A função fetchMessages agora vem ANTES do useEffect
   const fetchMessages = async () => {
     setIsLoading(true);
     
@@ -30,12 +31,17 @@ export default function Guestbook() {
       .select('*', { count: 'exact', head: true });
 
     if (!error && data) {
-      setMessages(data);
+      setMessages(data as MessageItem[]);
       setTotalMessages(count || data.length);
     }
     
     setIsLoading(false);
   };
+
+  useEffect(() => {
+    // eslint-disable-next-line
+    fetchMessages();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -79,10 +85,10 @@ export default function Guestbook() {
 
   const fadeUp = {
     hidden: { opacity: 0, y: 40 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.215, 0.61, 0.355, 1] } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.215, 0.61, 0.355, 1] as [number, number, number, number] } }
   };
 
-  const tabContent: Record<string, any> = {
+ const tabContent: Record<string, TabContent> = {
     musicas: {
       title: "On Repeat",
       items: ["Nirvana - Smells Like Teen Spirit", "My Chemical Romance - Demolition Lovers", "Los Hermanos - Último Romance", "My Chemical Romance - The Foundations of Decay", "LISA - Rockstar"]
@@ -104,7 +110,7 @@ export default function Guestbook() {
       <motion.div 
         initial={{ y: 0 }}
         animate={{ y: "100vh" }}
-        transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 1 }}
+        transition={{ duration: 0.8, ease: [0.215, 0.61, 0.355, 1] as [number, number, number, number] }}
         className="fixed inset-0 z-[9999] bg-manga-black flex items-center justify-center pointer-events-none overflow-hidden"
       >
         <motion.div 

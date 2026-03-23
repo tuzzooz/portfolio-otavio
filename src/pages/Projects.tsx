@@ -20,7 +20,7 @@ const projectsData = [
     client: 'Pessoal',
     tech: 'React Native & Expo',
     date: '2026',
-    image: 'https://images.unsplash.com/photo-1512295767273-ac109ac3acfa?q=80&w=800&auto=format&fit=crop'
+    image: '/app-HQ.png'
   },
   {
     id: 'music-bot',
@@ -36,7 +36,7 @@ const projectsData = [
     client: 'GSW',
     tech: 'Microserviços & Java',
     date: '2025',
-    image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800&auto=format&fit=crop'
+    image: '/GSW2.png'
   },
   {
     id: 'helpnei',
@@ -44,7 +44,7 @@ const projectsData = [
     client: 'Helpnei',
     tech: 'Typescript & React',
     date: '2025',
-    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop'
+    image: '/Helpnei1port.png'
   },
   {
     id: 'camara-vereadores',
@@ -52,21 +52,16 @@ const projectsData = [
     client: 'Prof. Massanori',
     tech: 'Python & Flask',
     date: '2024',
-    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop'
+    image: '/vereadores.png'
   }
 ];
 
 export default function Projects() {
   const [viewMode, setViewMode] = useState<'list' | 'grid'>('list');
 
-  const fadeUp = {
-    hidden: { opacity: 0, y: 40 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.215, 0.61, 0.355, 1] } }
-  };
-
   const heroFadeUp = {
     hidden: { opacity: 0, y: 40 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.215, 0.61, 0.355, 1], delay: 1 } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.215, 0.61, 0.355, 1] as [number, number, number, number] } }
   };
 
   return (
@@ -76,7 +71,7 @@ export default function Projects() {
       <motion.div 
         initial={{ y: 0 }}
         animate={{ y: "100vh" }}
-        transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 1 }}
+        transition={{ duration: 0.8, ease: [0.215, 0.61, 0.355, 1] as [number, number, number, number] }}
         className="fixed inset-0 z-[9999] bg-manga-black flex items-center justify-center pointer-events-none overflow-hidden"
       >
         <motion.div 

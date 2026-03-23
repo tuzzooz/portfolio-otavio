@@ -4,10 +4,6 @@ import { Globe, ArrowDownRight } from 'lucide-react';
 import Header from '../components/Header';
 
 export default function HeroSection() {
-  const contentFadeUp = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut", delay: 1.8 } }
-  };
 
   const pathRef = useRef<SVGPathElement>(null);
   const SVG_HEIGHT = 1000;
@@ -35,7 +31,7 @@ export default function HeroSection() {
         <motion.div 
           initial={{ clipPath: 'polygon(0 0, 100% 0, 100% 0, 0 0)' }}
           animate={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)' }}
-          transition={{ duration: 1.5, ease: [0.76, 0, 0.24, 1] }}
+          transition={{ duration: 1.5, ease: [0.76, 0, 0.24, 1] as [number, number, number, number] }}
           className="h-full w-full max-w-[500px]"
         >
           <svg 

@@ -7,7 +7,7 @@ export default function Home() {
     <div className="min-h-screen w-full bg-manga-black">
       <HeroSection />
       <WorkSection />
-      <Footer /> {/* Adicione o componente aqui */}
+      <Footer /> 
     </div>
   );
 }

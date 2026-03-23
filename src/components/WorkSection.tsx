@@ -43,11 +43,10 @@ export default function WorkSection() {
 
   const revealVariants = {
     hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0, 0, 0.2, 1] as [number, number, number, number] } }
   };
 
   return (
-
     <section className="w-full bg-manga-black pt-48 pb-24 md:pt-64 flex flex-col gap-32">
 
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-12 w-full px-8 md:px-20 lg:px-32">
@@ -77,14 +76,14 @@ export default function WorkSection() {
             initial={{ opacity: 0, scale: 0.5 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+            transition={{ duration: 0.8, delay: 0.4, ease: [0, 0, 0.2, 1] as [number, number, number, number] }}
             whileHover={{ scale: 1.15, transition: { duration: 0.2, delay: 0 } }} 
             className="cursor-pointer group"
           >
             <Link to="/sobre">
               <motion.div 
                 animate={{ rotate: [0, -360] }} 
-                transition={{ duration: 15, repeat: Infinity, repeatType: "loop", ease: "linear" }}
+                transition={{ duration: 15, repeat: Infinity, repeatType: "loop", ease: [0, 0, 1, 1] as [number, number, number, number] }}
                 className="w-28 h-28 md:w-32 md:h-32 rounded-full bg-manga-green border-2 border-transparent group-hover:bg-manga-black group-hover:border-manga-green flex items-center justify-center relative text-manga-black group-hover:text-manga-green overflow-hidden transition-colors duration-300"
               >
                 <svg viewBox="0 0 100 100" className="w-full h-full absolute inset-0">
@@ -111,7 +110,6 @@ export default function WorkSection() {
         ref={containerRef}
         onMouseMove={handleMouseMove}
         onMouseLeave={() => setActiveProject(null)}
-        // CORREÇÃO 3: Padronizei a linha do topo para border-manga-green/40
         className="relative flex flex-col w-full border-t border-manga-green/40"
       >
         {projects.map((proj, index) => (
@@ -123,7 +121,6 @@ export default function WorkSection() {
             viewport={{ once: true, margin: "-50px" }}
             transition={{ delay: index * 0.1 }}
             onMouseEnter={() => setActiveProject(proj.id)}
-            // CORREÇÃO 4: Padronizei a linha de baixo para border-manga-green/40 e adicionei o px-8
             className="flex flex-col md:flex-row justify-between md:items-center py-10 md:py-16 border-b border-manga-green/40 cursor-pointer group relative z-10 px-8 md:px-20 lg:px-32"
           >
             <h3 className="text-manga-green text-5xl md:text-8xl font-medium tracking-tight group-hover:translate-x-6 group-hover:text-manga-white/20 transition-all duration-500 ease-out">

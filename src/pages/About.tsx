@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import CDViewer from '../components/CDviewer'; 
+import CDViewer from '../components/CDViewer'; 
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 
@@ -14,12 +14,12 @@ export default function About() {
 
   const fadeUp = {
     hidden: { opacity: 0, y: 40 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.215, 0.61, 0.355, 1] } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.215, 0.61, 0.355, 1] as [number, number, number, number] } }
   };
 
   const heroFadeUp = {
     hidden: { opacity: 0, y: 40 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.215, 0.61, 0.355, 1], delay: 1.2 } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.215, 0.61, 0.355, 1] as [number, number, number, number], delay: 1.2 } }
   };
 
   return (
@@ -29,7 +29,7 @@ export default function About() {
       <motion.div 
         initial={{ y: 0 }}
         animate={{ y: "100vh" }}
-        transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 1 }}
+        transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] as [number, number, number, number], delay: 1 }}
         className="fixed inset-0 z-[9999] bg-manga-black flex items-center justify-center pointer-events-none overflow-hidden"
       >
         <motion.div 
