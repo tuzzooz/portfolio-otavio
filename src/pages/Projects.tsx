@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, LayoutGrid } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -7,15 +7,53 @@ import { projectsList, type ProjectCategory } from '../data/projects';
 
 type FilterType = 'all' | ProjectCategory;
 
-export default function Projects() {
-  const [viewMode, setViewMode] = useState<'list' | 'grid'>('list');
-  const [activeFilter, setActiveFilter] = useState<FilterType>('all');
+const STORAGE_VIEW_KEY = 'portfolio_projects_view_mode';
+const STORAGE_FILTER_KEY = 'portfolio_projects_active_filter';
+const STORAGE_SCROLL_KEY = 'portfolio_projects_scroll_y';
 
-  const counts = useMemo(() => ({
-    all: projectsList.length,
-    software: projectsList.filter((p) => p.category === 'software').length,
-    '3d': projectsList.filter((p) => p.category === '3d').length,
-  }), []);
+export default function Projects() {
+  const [viewMode, setViewMode] = useState<'list' | 'grid'>(() => {
+    const saved = sessionStorage.getItem(STORAGE_VIEW_KEY);
+    return saved === 'grid' || saved === 'list' ? saved : 'list';
+  });
+
+  const [activeFilter, setActiveFilter] = useState<FilterType>(() => {
+    const saved = sessionStorage.getItem(STORAGE_FILTER_KEY);
+    return saved === 'software' || saved === '3d' || saved === 'all' ? saved : 'all';
+  });
+
+  useEffect(() => {
+    sessionStorage.setItem(STORAGE_VIEW_KEY, viewMode);
+  }, [viewMode]);
+
+  useEffect(() => {
+    sessionStorage.setItem(STORAGE_FILTER_KEY, activeFilter);
+  }, [activeFilter]);
+
+  useEffect(() => {
+    const savedScroll = sessionStorage.getItem(STORAGE_SCROLL_KEY);
+    if (savedScroll) {
+      const y = parseInt(savedScroll, 10);
+      if (!Number.isNaN(y)) {
+        requestAnimationFrame(() => {
+          window.scrollTo({ top: y, behavior: 'instant' as ScrollBehavior });
+        });
+      }
+    }
+  }, []);
+
+  const handleProjectClick = () => {
+    sessionStorage.setItem(STORAGE_SCROLL_KEY, String(window.scrollY));
+  };
+
+  const counts = useMemo(
+    () => ({
+      all: projectsList.length,
+      software: projectsList.filter((p) => p.category === 'software').length,
+      '3d': projectsList.filter((p) => p.category === '3d').length,
+    }),
+    []
+  );
 
   const filteredProjects = useMemo(() => {
     if (activeFilter === 'all') return projectsList;
@@ -36,6 +74,9 @@ export default function Projects() {
     { id: 'software', label: 'Software & Full-Stack', count: counts.software },
     { id: '3d', label: '3D & Modding', count: counts['3d'] },
   ];
+
+  const getCategoryTag = (category: ProjectCategory) =>
+    category === '3d' ? '3D & Modding' : 'Software & Full-Stack';
 
   return (
     <div className="min-h-screen w-full bg-manga-black flex flex-col">
@@ -70,12 +111,7 @@ export default function Projects() {
           Meus <br /> Projetos
         </motion.h1>
 
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={heroFadeUp}
-          className="max-w-sm mb-2"
-        >
+        <motion.div initial="hidden" animate="visible" variants={heroFadeUp} className="max-w-sm mb-2">
           <p className="text-manga-white/50 text-base md:text-lg font-light leading-relaxed">
             Uma seleção de trabalhos onde exploro a interseção entre{' '}
             <span className="text-manga-green">engenharia de software</span>,{' '}
@@ -179,17 +215,16 @@ export default function Projects() {
                 >
                   <Link
                     to={`/projetos/${project.id}`}
+                    onClick={handleProjectClick}
                     className="group flex flex-col md:grid md:grid-cols-12 gap-4 items-start md:items-center py-8 md:py-10 border-b border-manga-white/10 hover:border-manga-green transition-colors cursor-pointer"
                   >
-                    <div className="col-span-5 flex items-center gap-3 w-full pr-4">
+                    <div className="col-span-5 flex flex-wrap items-center gap-3 w-full pr-4">
                       <span className="text-manga-white text-2xl md:text-3xl font-medium group-hover:text-manga-green transition-colors break-words">
                         {project.name}
                       </span>
-                      {project.category === '3d' && (
-                        <span className="text-[10px] uppercase tracking-widest px-2.5 py-0.5 rounded-full border border-manga-green/40 text-manga-green flex-shrink-0">
-                          3D
-                        </span>
-                      )}
+                      <span className="text-[10px] uppercase tracking-widest px-2.5 py-0.5 rounded-full border border-manga-green/40 text-manga-green flex-shrink-0">
+                        {getCategoryTag(project.category)}
+                      </span>
                     </div>
 
                     <div className="hidden md:block col-span-3 text-left text-manga-white/70 text-lg">
@@ -232,7 +267,11 @@ export default function Projects() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.35, delay: index * 0.06 }}
                 >
-                  <Link to={`/projetos/${project.id}`} className="group flex flex-col gap-6 cursor-pointer">
+                  <Link
+                    to={`/projetos/${project.id}`}
+                    onClick={handleProjectClick}
+                    className="group flex flex-col gap-6 cursor-pointer"
+                  >
                     <div className="w-full aspect-[4/3] md:aspect-video overflow-hidden bg-manga-white/5 relative border border-manga-white/10 group-hover:border-manga-green/50 transition-colors">
                       <img
                         src={project.cardImage}
@@ -240,11 +279,9 @@ export default function Projects() {
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                       />
                       <div className="absolute inset-0 bg-manga-black/20 group-hover:bg-transparent transition-colors duration-500" />
-                      {project.category === '3d' && (
-                        <span className="absolute top-4 right-4 bg-manga-black/80 backdrop-blur-sm border border-manga-green/50 text-manga-green text-[10px] uppercase tracking-widest px-3 py-1 rounded-full">
-                          3D & Modding
-                        </span>
-                      )}
+                      <span className="absolute top-4 right-4 bg-manga-black/85 backdrop-blur-sm border border-manga-green/50 text-manga-green text-[10px] uppercase tracking-widest px-3 py-1 rounded-full">
+                        {getCategoryTag(project.category)}
+                      </span>
                     </div>
 
                     <div className="flex justify-between items-start">
