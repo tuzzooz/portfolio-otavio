@@ -57,7 +57,7 @@ Cada projeto do portfólio funciona como uma faixa do álbum — indo de sistema
 | Track | Projeto | Contexto / Cliente | Stack Principal | Destaques Técnicos |
 | :---: | :--- | :--- | :--- | :--- |
 | **01** | **[Planejamento RF & BDGD](https://github.com/GeneSys-fatec/API-5DSM)** | GeneSys / Tecsys (5º Sem) | `Python` `Java Spring` `Flutter` `PostGIS` | Pipeline ETL geoespacial (BDGD/ANEEL) orquestrado via n8n + simulação matemática de cobertura de radiofrequência em mapa interativo. |
-| **02** | **Orihime Inoue 3D Mod** | Pessoal (*skate.* / ReSkate) | `Blender 3D` `Python` `C#` `Three.js` | Re-rigging de 129 ossos (31.3k vértices), baking de texturas 2K, patch binário Oodle Kraken (`.fbmod`) e **Visualizador 3D interativo** no site. |
+| **02** | **[Orihime Inoue 3D Mod](https://github.com/tuzzooz/mod-orihime-reskate)** | Pessoal (*skate.* / ReSkate) | `Blender 3D` `Python` `C#` `Three.js` | Re-rigging de 129 ossos (31.3k vértices), baking de texturas 2K, patch binário Oodle Kraken (`.fbmod`) e **Visualizador 3D interativo** no site. |
 | **03** | **[Spider-Punk 2099 Mod](https://github.com/tuzzooz/mod-aranha-2099)** | Pessoal (*Spider-Man PC*) | `Blender 3D` `UV Mapping` `DirectXTex` `ALERT` | Re-rigging anatômico, remapeamento UV de shader emissivo para a viseira neon e atlas de texturas 4K (`4096×4096`) com correção sRGB. |
 | **04** | **Dashboard Tecsus IoT** | Tecsus (4º Sem) | `Next.js` `TypeScript` `IoT` | Atuação como **Scrum Master** e dev Front-end em plataforma de telemetria em tempo real para eficiência hídrica e energética. |
 | **05** | **Leitor de HQ & Mangás** | Pessoal | `React Native` `Expo` `Figma` | App mobile multiplataforma com scanner de ISBN via câmera, arquitetura offline-first e UI/UX autoral. |

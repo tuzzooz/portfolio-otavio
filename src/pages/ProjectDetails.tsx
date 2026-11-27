@@ -44,7 +44,8 @@ const projectsDatabase: Record<string, ProjectEntry> = {
     impact: 'Automatizei o pipeline no Blender via scripts Python para mapear e transferir os pesos do rig original para a hierarquia de ossos do skate. Além da modelagem 3D, realizei engenharia reversa de crash dumps e patching binário de pacotes comprimidos com Oodle Kraken (.fbmod / blocos EFIX da engine Frostbite) em C#, resolvendo colisões de ponteiros de textura e TypeInfo para rodar o personagem perfeitamente in-game.',
     image: '/Orihime-ReSkate.png',
     secondaryImage: '/Orihime-3D.png',
-    has3DViewer: true
+    has3DViewer: true,
+    github: 'https://github.com/tuzzooz/mod-orihime-reskate'
   },
   'spider-punk-2099': {
     name: 'Spider-Punk 2099 Mod',
