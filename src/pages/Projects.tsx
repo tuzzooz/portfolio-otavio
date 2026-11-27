@@ -7,6 +7,22 @@ import Header from '../components/Header';
 
 const projectsData = [
   {
+    id: 'genesys-tecsys',
+    name: 'Planejamento RF & BDGD',
+    client: 'GeneSys / Tecsys',
+    tech: 'Python, Java, Flutter & GIS',
+    date: '2026',
+    image: '/Genesys-RF.png'
+  },
+  {
+    id: 'orihime-mod',
+    name: 'Orihime Inoue 3D Mod',
+    client: 'Pessoal (ReSkate)',
+    tech: 'Blender 3D, Rigging & Reverse Eng.',
+    date: '2026',
+    image: '/Orihime-3D.png'
+  },
+  {
     id: 'tecsus-iot',
     name: 'Dashboard Tecsus IoT',
     client: 'Tecsus',

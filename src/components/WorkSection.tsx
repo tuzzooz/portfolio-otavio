@@ -5,20 +5,31 @@ import { Link } from 'react-router-dom';
 const projects = [
   { 
     id: 1, 
-    name: 'Vereadores', 
-    tech: 'Python & Flask',
-    role: 'Back-end | Scraping de dados e Portal de Transparência',
-    image: '/projetos/vereadores.jpg' 
+    slug: 'genesys-tecsys',
+    name: 'GeneSys RF', 
+    tech: 'Python, Java, Flutter & PostGIS',
+    role: 'Full-Stack & Data ETL | Planejamento Geográfico BDGD e Cobertura RF',
+    image: '/projetos/Genesys.png' 
   },
   { 
     id: 2, 
-    name: 'Helpnei', 
-    tech: 'React & Tailwind',
-    role: 'UI/UX & Front-end | Design e desenvolvimento de Dashboard',
-    image: '/projetos/Helpnei.jpg'
+    slug: 'orihime-mod',
+    name: 'Orihime 3D', 
+    tech: 'Blender 3D & Frostbite Modding',
+    role: '3D Modeling & Reverse Eng. | Rigging 129 ossos e Patch Binário para skate.',
+    image: '/projetos/Orihime.png'
   },
   { 
     id: 3, 
+    slug: 'tecsus-iot',
+    name: 'Tecsus IoT', 
+    tech: 'Next.js, TypeScript & Hardware',
+    role: 'SCRUM Master & Front-end | Telemetria e Eficiência Energética',
+    image: '/Tecsus.png'
+  },
+  { 
+    id: 4, 
+    slug: 'gsw-task-manager',
     name: 'GSW', 
     tech: 'Java, Spring & MongoDB',
     role: 'Full-Stack | Sistema web para gestão de tarefas',
@@ -113,29 +124,30 @@ export default function WorkSection() {
         className="relative flex flex-col w-full border-t border-manga-green/40"
       >
         {projects.map((proj, index) => (
-          <motion.div 
-            key={proj.id}
-            variants={revealVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ delay: index * 0.1 }}
-            onMouseEnter={() => setActiveProject(proj.id)}
-            className="flex flex-col md:flex-row justify-between md:items-center py-10 md:py-16 border-b border-manga-green/40 cursor-pointer group relative z-10 px-8 md:px-20 lg:px-32"
-          >
-            <h3 className="text-manga-green text-5xl md:text-8xl font-medium tracking-tight group-hover:translate-x-6 group-hover:text-manga-white/20 transition-all duration-500 ease-out">
-              {proj.name}
-            </h3>
-            
-            <div className="flex flex-col items-start md:items-end mt-6 md:mt-0 group-hover:-translate-x-6 transition-transform duration-500 ease-out">
-              <span className="text-manga-green text-lg md:text-2xl font-light group-hover:text-manga-white/30 transition-colors duration-500">
-                {proj.tech}
-              </span>
-              <span className="text-manga-white/60 text-sm md:text-base font-light mt-2 max-w-xs md:text-right group-hover:text-manga-white/20 transition-colors duration-500">
-                {proj.role}
-              </span>
-            </div>
-          </motion.div>
+          <Link to={`/projetos/${proj.slug}`} key={proj.id}>
+            <motion.div 
+              variants={revealVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ delay: index * 0.1 }}
+              onMouseEnter={() => setActiveProject(proj.id)}
+              className="flex flex-col md:flex-row justify-between md:items-center py-10 md:py-16 border-b border-manga-green/40 cursor-pointer group relative z-10 px-8 md:px-20 lg:px-32"
+            >
+              <h3 className="text-manga-green text-5xl md:text-8xl font-medium tracking-tight group-hover:translate-x-6 group-hover:text-manga-white/20 transition-all duration-500 ease-out">
+                {proj.name}
+              </h3>
+              
+              <div className="flex flex-col items-start md:items-end mt-6 md:mt-0 group-hover:-translate-x-6 transition-transform duration-500 ease-out">
+                <span className="text-manga-green text-lg md:text-2xl font-light group-hover:text-manga-white/30 transition-colors duration-500">
+                  {proj.tech}
+                </span>
+                <span className="text-manga-white/60 text-sm md:text-base font-light mt-2 max-w-xs md:text-right group-hover:text-manga-white/20 transition-colors duration-500">
+                  {proj.role}
+                </span>
+              </div>
+            </motion.div>
+          </Link>
         ))}
 
         <motion.div

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { supabase } from '../services/supabase';
+import { supabase, isSupabaseConfigured } from '../services/supabase';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 
@@ -17,6 +17,10 @@ export default function Guestbook() {
   const [activeTab, setActiveTab] = useState('musicas');
 
   const fetchMessages = async () => {
+    if (!isSupabaseConfigured) {
+      setIsLoading(false);
+      return;
+    }
     setIsLoading(true);
     
     const { data, error } = await supabase

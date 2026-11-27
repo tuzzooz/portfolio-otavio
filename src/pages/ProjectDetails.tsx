@@ -1,11 +1,50 @@
-import { useEffect } from 'react';
+import { useEffect, lazy, Suspense } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Github } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
-const projectsDatabase = {
+const OrihimeViewer = lazy(() => import('../components/OrihimeViewer'));
+
+interface ProjectEntry {
+  name: string;
+  client: string;
+  tech: string;
+  date: string;
+  role: string;
+  overview: string;
+  impact: string;
+  image: string;
+  secondaryImage?: string;
+  has3DViewer?: boolean;
+  github?: string;
+}
+
+const projectsDatabase: Record<string, ProjectEntry> = {
+  'genesys-tecsys': {
+    name: 'Planejamento RF & BDGD',
+    client: 'GeneSys / Tecsys (5º Sem)',
+    tech: 'Python, Java Spring, Flutter & PostGIS',
+    date: '2026',
+    role: 'Desenvolvedor FullStack & Data ETL',
+    overview: 'Plataforma multiplataforma desenvolvida em parceria com a Tecsys para apoiar distribuidoras de energia elétrica no planejamento de infraestrutura de radiofrequência (gateways). O sistema consome dados geográficos públicos da BDGD (ANEEL), cruza ativos da rede elétrica (postes, subestações, transformadores e religadores) com modelos matemáticos de propagação de sinal e propõe cenários otimizados de cobertura em mapa interativo.',
+    impact: 'Atuei na engenharia do pipeline de ETL em Python orquestrado via n8n para extração e processamento otimizado de camadas geoespaciais (FileGDB/PostGIS), além da integração com o backend em Java (Spring Boot) e visualização de cobertura e KPIs no frontend em Flutter.',
+    image: '/Genesys-RF.png',
+    github: 'https://github.com/GeneSys-fatec/API-5DSM'
+  },
+  'orihime-mod': {
+    name: 'Orihime Inoue 3D Mod',
+    client: 'Pessoal (skate. / ReSkate)',
+    tech: 'Blender 3D, Python, Frostbite & C#',
+    date: '2026',
+    role: '3D Technical Artist & Reverse Engineer',
+    overview: 'Projeto completo de modelagem 3D, rigging e modding para o jogo skate. (EA) utilizando a plataforma ReSkate Studio. O modelo da personagem Orihime Inoue (Bleach) foi importado do formato XPS para o Blender (31.361 vértices e 41.553 triângulos), passando por unificação de malhas, baking de atlas de texturas 2048x2048 e transferência completa de pesos (Weight Painting) para o esqueleto humanoide de 129 ossos do jogo.',
+    impact: 'Automatizei o pipeline no Blender via scripts Python para mapear e transferir os pesos do rig original para a hierarquia de ossos do skate. Além da modelagem 3D, realizei engenharia reversa de crash dumps e patching binário de pacotes comprimidos com Oodle Kraken (.fbmod / blocos EFIX da engine Frostbite) em C#, resolvendo colisões de ponteiros de textura e TypeInfo para rodar o personagem perfeitamente in-game.',
+    image: '/Orihime-ReSkate.png',
+    secondaryImage: '/Orihime-3D.png',
+    has3DViewer: true
+  },
   'tecsus-iot': {
     name: 'IoT Dashboard',
     client: 'Tecsus',
@@ -145,20 +184,65 @@ export default function ProjectDetails() {
         </motion.div>
       </section>
 
-      {/* Cover */}
-      <section className="px-6 md:px-16 lg:px-32 pb-24">
-        <motion.div 
-          initial="hidden"
-          animate="visible"
-          variants={fadeUp}
-          className="w-full aspect-video bg-manga-white/5 overflow-hidden"
-        >
-          <img 
-            src={project.image} 
-            alt={project.name}
-            className="w-full h-full object-cover"
-          />
-        </motion.div>
+      {/* Cover / 3D Viewer */}
+      <section className="px-6 md:px-16 lg:px-32 pb-24 flex flex-col gap-12">
+        {project.has3DViewer ? (
+          <>
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={fadeUp}
+              className="w-full"
+            >
+              <Suspense
+                fallback={
+                  <div className="w-full h-[520px] md:h-[680px] bg-manga-white/5 flex items-center justify-center text-manga-green uppercase tracking-widest text-sm">
+                    Inicializando Cena 3D...
+                  </div>
+                }
+              >
+                <OrihimeViewer />
+              </Suspense>
+            </motion.div>
+
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={fadeUp}
+              className="grid grid-cols-1 md:grid-cols-2 gap-8"
+            >
+              <div className="w-full aspect-video bg-manga-white/5 overflow-hidden border border-manga-white/10">
+                <img
+                  src={project.image}
+                  alt={`${project.name} no ReSkate Studio`}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              {project.secondaryImage && (
+                <div className="w-full aspect-video bg-manga-white/5 overflow-hidden border border-manga-white/10">
+                  <img
+                    src={project.secondaryImage}
+                    alt={`${project.name} Render Blender`}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              )}
+            </motion.div>
+          </>
+        ) : (
+          <motion.div 
+            initial="hidden"
+            animate="visible"
+            variants={fadeUp}
+            className="w-full aspect-video bg-manga-white/5 overflow-hidden"
+          >
+            <img 
+              src={project.image} 
+              alt={project.name}
+              className="w-full h-full object-cover"
+            />
+          </motion.div>
+        )}
       </section>
 
       {/* Content */}
@@ -184,7 +268,7 @@ export default function ProjectDetails() {
               <p>{project.impact}</p>
             </div>
             
-            {project.github && (
+            {project.github && project.github.startsWith('http') && (
               <a 
                 href={project.github} 
                 target="_blank" 
