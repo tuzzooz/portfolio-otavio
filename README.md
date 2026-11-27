@@ -58,12 +58,13 @@ Cada projeto do portfólio funciona como uma faixa do álbum — indo de sistema
 | :---: | :--- | :--- | :--- | :--- |
 | **01** | **[Planejamento RF & BDGD](https://github.com/GeneSys-fatec/API-5DSM)** | GeneSys / Tecsys (5º Sem) | `Python` `Java Spring` `Flutter` `PostGIS` | Pipeline ETL geoespacial (BDGD/ANEEL) orquestrado via n8n + simulação matemática de cobertura de radiofrequência em mapa interativo. |
 | **02** | **Orihime Inoue 3D Mod** | Pessoal (*skate.* / ReSkate) | `Blender 3D` `Python` `C#` `Three.js` | Re-rigging de 129 ossos (31.3k vértices), baking de texturas 2K, patch binário Oodle Kraken (`.fbmod`) e **Visualizador 3D interativo** no site. |
-| **03** | **Dashboard Tecsus IoT** | Tecsus (4º Sem) | `Next.js` `TypeScript` `IoT` | Atuação como **Scrum Master** e dev Front-end em plataforma de telemetria em tempo real para eficiência hídrica e energética. |
-| **04** | **Leitor de HQ & Mangás** | Pessoal | `React Native` `Expo` `Figma` | App mobile multiplataforma com scanner de ISBN via câmera, arquitetura offline-first e UI/UX autoral. |
-| **05** | **[Ollama Music Bot](https://github.com/tuzzooz/ChatBot-Musica)** | Pessoal | `Python` `Ollama LLM` `Telegram API` | Bot assíncrono com IA local que processa linguagem natural e retorna letras e curiosidades musicais em `< 2s`. |
-| **06** | **[Task Manager](https://github.com/the-devs-department/GSW-2025.2-3Sem)** | GSW (3º Sem) | `Java` `Spring Boot` `MongoDB` `JUnit` | Arquitetura de microsserviços sob alta concorrência com **90% de cobertura de testes** nas rotinas críticas. |
-| **07** | **[Dashboard Empresas](https://github.com/the-devs-department/HELPNEI-2025.1-2Sem)** | Helpnei (2º Sem) | `React` `TypeScript` `Tailwind CSS` | Painel analítico B2B com refatoração completa de estado via Context API eliminando *prop drilling*. |
-| **08** | **[Câmara Vereadores](https://github.com/tuzzooz/the-devs-department)** | API 1º Semestre | `Python` `Flask` `Web Scraping` | Extração automatizada de dados de PDFs públicos e dashboard de transparência de votações municipais. |
+| **03** | **[Spider-Punk 2099 Mod](https://github.com/tuzzooz/mod-aranha-2099)** | Pessoal (*Spider-Man PC*) | `Blender 3D` `UV Mapping` `DirectXTex` `ALERT` | Re-rigging anatômico, remapeamento UV de shader emissivo para a viseira neon e atlas de texturas 4K (`4096×4096`) com correção sRGB. |
+| **04** | **Dashboard Tecsus IoT** | Tecsus (4º Sem) | `Next.js` `TypeScript` `IoT` | Atuação como **Scrum Master** e dev Front-end em plataforma de telemetria em tempo real para eficiência hídrica e energética. |
+| **05** | **Leitor de HQ & Mangás** | Pessoal | `React Native` `Expo` `Figma` | App mobile multiplataforma com scanner de ISBN via câmera, arquitetura offline-first e UI/UX autoral. |
+| **06** | **[Ollama Music Bot](https://github.com/tuzzooz/ChatBot-Musica)** | Pessoal | `Python` `Ollama LLM` `Telegram API` | Bot assíncrono com IA local que processa linguagem natural e retorna letras e curiosidades musicais em `< 2s`. |
+| **07** | **[Task Manager](https://github.com/the-devs-department/GSW-2025.2-3Sem)** | GSW (3º Sem) | `Java` `Spring Boot` `MongoDB` `JUnit` | Arquitetura de microsserviços sob alta concorrência com **90% de cobertura de testes** nas rotinas críticas. |
+| **08** | **[Dashboard Empresas](https://github.com/the-devs-department/HELPNEI-2025.1-2Sem)** | Helpnei (2º Sem) | `React` `TypeScript` `Tailwind CSS` | Painel analítico B2B com refatoração completa de estado via Context API eliminando *prop drilling*. |
+| **09** | **[Câmara Vereadores](https://github.com/tuzzooz/the-devs-department)** | API 1º Semestre | `Python` `Flask` `Web Scraping` | Extração automatizada de dados de PDFs públicos e dashboard de transparência de votações municipais. |
 
 ---
 

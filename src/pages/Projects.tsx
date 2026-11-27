@@ -23,6 +23,14 @@ const projectsData = [
     image: '/Orihime-3D.png'
   },
   {
+    id: 'spider-punk-2099',
+    name: 'Spider-Punk 2099 Mod',
+    client: 'Pessoal (Spider-Man PC)',
+    tech: 'Blender 3D, UV Mapping & DirectXTex',
+    date: '2026',
+    image: '/SpiderPunk-Action.jpg'
+  },
+  {
     id: 'tecsus-iot',
     name: 'Dashboard Tecsus IoT',
     client: 'Tecsus',

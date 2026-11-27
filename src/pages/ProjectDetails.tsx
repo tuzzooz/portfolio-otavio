@@ -17,6 +17,7 @@ interface ProjectEntry {
   impact: string;
   image: string;
   secondaryImage?: string;
+  gallery?: string[];
   has3DViewer?: boolean;
   github?: string;
 }
@@ -44,6 +45,23 @@ const projectsDatabase: Record<string, ProjectEntry> = {
     image: '/Orihime-ReSkate.png',
     secondaryImage: '/Orihime-3D.png',
     has3DViewer: true
+  },
+  'spider-punk-2099': {
+    name: 'Spider-Punk 2099 Mod',
+    client: 'Pessoal (Spider-Man Remastered)',
+    tech: 'Blender 3D, UV Mapping, ALERT & DirectXTex',
+    date: '2026',
+    role: '3D Character Artist & Technical Modder',
+    overview: 'Port experimental e adaptação 3D do traje Spider-Punk 2099 para o Marvel’s Spider-Man Remastered (PC). O modelo passou por re-rigging completo no Blender para se ajustar à estrutura óssea do Peter Parker, com duas camadas UV, separação de shader emissivo para a viseira luminosa e empacotamento final em .stage via ALERT, DirectXTex e Overstrike.',
+    impact: 'Adaptei a malha e os grupos de vértices ao esqueleto do jogo, refinando a transição anatômica entre braço e clavícula para poses extremas de balanço e ajustando as falanges dos dedos. Remapeei as coordenadas UV entre Equip_01 e Equip_02 para isolar a emissão neon da viseira do material do tecido e construí um atlas de texturas 4K (4096×4096) com correção sRGB e mapa de brilho dedicado.',
+    image: '/SpiderPunk-Action.jpg',
+    gallery: [
+      '/SpiderPunk-Night.jpg',
+      '/SpiderPunk-Combat.jpg',
+      '/SpiderPunk-Blender-Frente.png',
+      '/SpiderPunk-Blender-Costas.png'
+    ],
+    github: 'https://github.com/tuzzooz/mod-aranha-2099'
   },
   'tecsus-iot': {
     name: 'IoT Dashboard',
@@ -230,18 +248,42 @@ export default function ProjectDetails() {
             </motion.div>
           </>
         ) : (
-          <motion.div 
-            initial="hidden"
-            animate="visible"
-            variants={fadeUp}
-            className="w-full aspect-video bg-manga-white/5 overflow-hidden"
-          >
-            <img 
-              src={project.image} 
-              alt={project.name}
-              className="w-full h-full object-cover"
-            />
-          </motion.div>
+          <>
+            <motion.div 
+              initial="hidden"
+              animate="visible"
+              variants={fadeUp}
+              className="w-full aspect-video bg-manga-white/5 overflow-hidden border border-manga-white/10"
+            >
+              <img 
+                src={project.image} 
+                alt={project.name}
+                className="w-full h-full object-cover"
+              />
+            </motion.div>
+
+            {project.gallery && project.gallery.length > 0 && (
+              <motion.div
+                initial="hidden"
+                animate="visible"
+                variants={fadeUp}
+                className="grid grid-cols-1 md:grid-cols-2 gap-8"
+              >
+                {project.gallery.map((imgUrl, idx) => (
+                  <div
+                    key={idx}
+                    className="w-full aspect-video bg-manga-white/5 overflow-hidden border border-manga-white/10"
+                  >
+                    <img
+                      src={imgUrl}
+                      alt={`${project.name} preview ${idx + 1}`}
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                    />
+                  </div>
+                ))}
+              </motion.div>
+            )}
+          </>
         )}
       </section>
 
